@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 500px;
+            background: white;
+            margin: 80px auto;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #444;
+        }
+
+        form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #5a67d8;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f5f5f5;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-delete {
+            background: crimson;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-delete:hover {
+            background: darkred;
+        }
+
+        .logout {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .logout a {
+            color: #667eea;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logout a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="signup-login">
+        <div class="signup-box scr">
+            <div class="heading">
+                <h2>Get Things Done</h2>
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" class="todo-input inp" name="title" required placeholder="Add Today's Task">
+                <input type="submit" class="submit-button" value="Add Task">
+            </form>
+
+            <div class="todo-list">
+                {% for todo in res %}
+                <div class="todo-item">
+                    <p>{{ todo.title }}</p>
+                    <form method="post" action="{% url 'delete_todo' todo.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn">❌</button>
+                    </form>
+                </div>
+                {% empty %}
+                <p class="no-task">No tasks yet. Add one above!</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

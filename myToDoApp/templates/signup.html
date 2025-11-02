@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-login {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            width: 300px;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #5a67d8;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        b {
+            display: block;
+            margin-bottom: 5px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-login">
+        <form method="post">
+            {% csrf_token %}
+            <div class="heading">Sign Up</div>
+
+            <div class="field">
+                <b>Username</b>
+                <input type="text" placeholder="username" name="fnm" required>
+            </div>
+
+            <div class="field">
+                <b>Email</b>
+                <input type="text" placeholder="email" name="email" required>
+            </div>
+
+            <div class="field">
+                <b>Password</b>
+                <input type="password" placeholder="password" name="pwd" required>
+            </div>
+
+            <div class="field">
+                <input type="submit" value="Sign Up">
+            </div>
+
+            <div class="field" style="text-align:center;">
+                <b>Already have an account?</b>
+                <a href="/login">Login</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
